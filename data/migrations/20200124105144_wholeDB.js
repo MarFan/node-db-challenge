@@ -4,6 +4,7 @@ exports.up = function(knex) {
         tbl.increments('ProjectId');
         tbl.string('Name', 128).notNullable();
         tbl.text('Desc');
+        tbl.boolean('Completed').defaultTo(0);
     })
     .createTable('tasks', tbl => {
         tbl.increments('TaskId');
@@ -20,7 +21,7 @@ exports.up = function(knex) {
     })
     .createTable('resources', tbl => {
         tbl.increments('ResourceId');
-        tbl.string('ResourceName', 128).notNullable();
+        tbl.string('ResourceName', 128).notNullable().unique();
         tbl.text('ResourceDesc');
     })
     .createTable('project_resources', tbl => {
